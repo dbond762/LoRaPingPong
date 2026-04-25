@@ -37,3 +37,8 @@ desktop.ini
 
 # IDE local settings
 *.user
+
+# Submodule build artefacts
+Drivers/SWDR005/build/
+Drivers/SWDR005/Debug/
+Drivers/SWDR005/Release/
