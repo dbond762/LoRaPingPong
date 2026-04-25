@@ -1,0 +1,39 @@
+# Build output
+Debug/
+Release/
+build/
+
+# CubeIDE workspace metadata
+.metadata/
+.settings/
+*.launch
+
+# CubeIDE generated
+# *.ioc
+
+# Object files
+*.o
+*.d
+*.su
+
+# Binary output
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+
+# Eclipse project files
+# .project
+# .cproject
+
+# STM32CubeMX backup
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE local settings
+*.user
