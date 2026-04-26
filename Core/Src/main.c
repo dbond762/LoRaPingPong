@@ -21,7 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "link.h"
+#include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,7 +64,12 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+/* ── Retarget printf → UART2 ────────────────────────────────── */
+int __io_putchar(int ch)
+{
+    HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+    return ch;
+}
 /* USER CODE END 0 */
 
 /**
@@ -98,19 +105,26 @@ int main(void)
   MX_SPI1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+#ifdef NodeA
+  node_a_init();
+#elif defined(NodeB)
+  node_b_init();
+#else
+#error "NODE_A or NODE_B not defined!"
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-
-	  uint8_t msg[] = "TEST\r\n";
-	  HAL_UART_Transmit(&huart2, msg, sizeof(msg)-1, 100);
-
-	  HAL_Delay(500);
+#ifdef NodeA
+	  node_a_loop();
+#elif defined(NodeB)
+	  node_b_loop();
+#else
+#error "NODE_A or NODE_B not defined!"
+#endif
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

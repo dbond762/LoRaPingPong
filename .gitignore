@@ -1,5 +1,7 @@
 # Build output
 Debug/
+Debug_NodeA/
+Debug_NodeB/
 Release/
 build/
 
